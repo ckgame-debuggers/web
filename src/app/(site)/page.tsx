@@ -6,11 +6,9 @@ import Image from "next/image";
 export default function Home() {
   return (
     <main>
+      <HomeNotice />
       <HomeBanner />
       <HomeMarquee />
-      <div className="max-w-[1200px] mx-auto">
-        <HomeNotice />
-      </div>
     </main>
   );
 }

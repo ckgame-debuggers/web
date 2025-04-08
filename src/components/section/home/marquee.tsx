@@ -4,12 +4,12 @@ import Link from "next/link";
 
 export default function HomeMarquee() {
   return (
-    <div className="relative w-fit h-fit mx-auto flex justify-center flex-col items-center">
+    <div className="max-w-[1200px] relative w-full h-fit mx-auto flex justify-center flex-col items-center overflow-hidden">
       <div className="z-10 absolute left-0 top-0 h-full w-32 bg-gradient-to-r from-background to-transparent pointer-events-none"></div>
       <div className="z-10 absolute right-0 top-0 h-full w-32 bg-gradient-to-l from-background to-transparent pointer-events-none"></div>
       <Marquee
         pauseOnHover
-        className="max-w-[1200px] z-0 mx-auto overflow-y-hidden [--duration:20s]"
+        className="overflow-y-hidden [--duration:20s] relative z-0"
       >
         <HomeMarqueeItem
           thumbnail="https://ckgamelab.com/wp-content/uploads/2025/02/1-2-300x300.jpg"

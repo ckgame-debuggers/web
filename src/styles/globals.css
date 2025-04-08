@@ -7,9 +7,7 @@
   --color-border: var(--border);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
-
   --animate-marque: marquee var(--duration) linear infinite
-
   --animate-marquee-vertical: marquee-vertical var(--duration) linear infinite
 }
 
@@ -50,7 +48,7 @@
     --secondary-background: #1b1b1b17;
     --border: rgba(76, 76, 76, 0.159);
     --primary: #ff700f;
-    --primary-foreground: #2b2417;
+    --primary-foreground: #ffffff;
   }
 
   .dark {

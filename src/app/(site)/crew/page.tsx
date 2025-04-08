@@ -37,7 +37,7 @@ function CrewItem({
   bg: string;
 }) {
   return (
-    <Link href={href} className="group/crew cursor-pointer">
+    <Link href={href} className="group/crew cursor-pointer text-white">
       <div
         className=" w-full h-52 relative overflow-hidden"
         style={{

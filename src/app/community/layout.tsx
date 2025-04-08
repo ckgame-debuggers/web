@@ -1,15 +1,6 @@
-import type { Metadata } from "next";
-import { Noto_Sans_KR } from "next/font/google";
-import "@/styles/globals.css";
-import { ThemeProvider } from "@/components/ui/theme-provider";
-import GlobalHeader from "@/components/section/global/global-header";
+import CommunityHeader from "@/components/section/community/community-header";
 import GlobalFooter from "@/components/section/global/global-footer";
-
-const fontSans = Noto_Sans_KR({
-  weight: ["400", "700"],
-  subsets: ["latin"],
-  variable: "--font-sans",
-});
+import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "디버거즈 - 청강문화산업대학교 게임스쿨 학생회",
@@ -31,18 +22,16 @@ export const metadata: Metadata = {
   },
 };
 
-export default function RootLayout({
+export default function CommunityLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${fontSans.className} antialiased`}>
-        <ThemeProvider defaultTheme="system" enableSystem attribute="class">
-          {children}
-        </ThemeProvider>
-      </body>
-    </html>
+    <>
+      <CommunityHeader />
+      {children}
+      <GlobalFooter />
+    </>
   );
 }

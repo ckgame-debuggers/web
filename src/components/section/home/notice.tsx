@@ -4,53 +4,50 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 const exampleNoticeData = [
-  { title: "2월 4주차 공지사항 #1 : 개인정보 처리방침 안내", href: "/" },
-  { title: "2월 4주차 공지사항 #2 : 서비스 이용약관 변경", href: "/" },
-  { title: "3월 1주차 공지사항 #1 : 시스템 점검 안내", href: "/" },
-  { title: "3월 1주차 공지사항 #2 : 신규 기능 업데이트", href: "/" },
-  { title: "3월 1주차 공지사항 #3 : 이벤트 참여 방법", href: "/" },
+  { title: "개인정보 처리방침을 변경하고 있습니다.", id: "/" },
+  { title: "서비스 이용약관 변경", id: "/" },
+  { title: "시스템 점검 안내", id: "/" },
+  { title: "신규 기능 업데이트", id: "/" },
+  { title: "이벤트 참여 방법", id: "/" },
 ];
 
 export default function HomeNotice() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [notices, setNotices] = useState<{ title: string; href: string }[]>([]);
+  const [notices, setNotices] = useState<{ title: string; id: string }[]>([]);
   useEffect(() => {
     setNotices(exampleNoticeData);
   }, []);
 
   return (
-    <div className="mt-15 px-15">
-      <h3 className="text-primary text-2xl font-black text-center mb-10">
-        공지사항
-      </h3>
-      <div className="">
+    <div className="bg-primary text-primary-foreground p-1">
+      <div className="max-w-[1100px] mx-auto">
         {notices.map((item, i) => {
           return (
-            <NoticeItem
+            <div
+              style={{
+                display: currentIndex === i ? "block" : "none",
+              }}
               key={i}
-              title={item.title}
-              href={item.href}
-              isActive={false}
-            />
+            >
+              <NoticeItem title={item.title} href={`/notice/${item.id}`} />
+            </div>
           );
         })}
+        <IndexController />
       </div>
     </div>
   );
 }
 
-function NoticeItem({
-  title,
-  href,
-  isActive = true,
-}: {
-  title: string;
-  href: string;
-  isActive?: boolean;
-}) {
+function NoticeItem({ title, href }: { title: string; href: string }) {
   return (
     <Link href={href}>
-      <h4 className="text-lg font-bold">{title}</h4>
+      <h4 className="font-bold mt-[-1px]">{title}</h4>
     </Link>
   );
 }
+
+function IndexController() {
+  return <div></div>;
+}
+  
