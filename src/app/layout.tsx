@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Noto_Sans_KR } from "next/font/google";
-import "@/styles/globals.css";
 import { ThemeProvider } from "@/components/ui/theme-provider";
-import GlobalHeader from "@/components/section/global/global-header";
-import GlobalFooter from "@/components/section/global/global-footer";
+
+import "@/styles/globals.css";
+import "@/styles/quill-theme.css";
 
 const fontSans = Noto_Sans_KR({
   weight: ["400", "700"],
@@ -37,7 +37,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ko-KR">
       <body className={`${fontSans.className} antialiased`}>
         <ThemeProvider defaultTheme="system" enableSystem attribute="class">
           {children}

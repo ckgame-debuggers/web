@@ -4,12 +4,14 @@ import Link from "next/link";
 import SearchBar from "@/components/ui/search-bar";
 import ThemeChanger from "@/components/ui/theme-changer";
 import { buttonVariants } from "@/components/ui/button";
+import RequireLogin from "@/components/util/require-login";
 
 import logo from "$/brand/logo.png";
 
 export default function CommunityHeader() {
   return (
     <header className="border-b border-b-border py-3 px-3 ">
+      <RequireLogin />
       <div className="max-w-[1200px] mx-auto flex justify-between items-center gap-5">
         <div className="flex gap-2 items-center">
           <Link

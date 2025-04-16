@@ -1,13 +1,33 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
+import { buttonVariants } from "@/components/ui/button";
+import { useEffect, useMemo, useState } from "react";
 import ThemeChanger from "@/components/ui/theme-changer";
 import HeaderItems from "@/components/ui/header-item";
+import { DebuggersAPI } from "@/components/util/api";
+import Avatar from "@/components/ui/avatar";
+import useUserStore from "@/store/user";
 
 import logo from "$/brand/logo.png";
-import { buttonVariants } from "@/components/ui/button";
-
 export default function GlobalHeader() {
+  const { user, setUser, isLoggedIn } = useUserStore();
+  const currentURL = useMemo<string>(() => {
+    const location = window.location.href;
+    if (location.endsWith("/login")) return "/";
+    if (location.includes("/register")) return "/";
+    return location;
+  }, []);
+
+  const debuggersAPI = DebuggersAPI.getInstance();
+  useEffect(() => {
+    const fetchUser = async () => {
+      const userData = await debuggersAPI.isLoggedIn();
+      if (userData) setUser(userData);
+    };
+    fetchUser();
+  }, [debuggersAPI]);
+
   return (
     <header>
       <div className="flex justify-between px-5 max-w-[1200px] mx-auto">
@@ -25,10 +45,26 @@ export default function GlobalHeader() {
           <HeaderItems href={"/under-develop"}>커뮤니티</HeaderItems>
         </div>
         <div className="flex items-center gap-1">
-          <Link href={"/login"} className={buttonVariants({}) + "block px-4"}>
-            로그인
-          </Link>
-          <ThemeChanger />
+          {isLoggedIn ? (
+            <Link href={"/settings"}>
+              <Avatar
+                displayName={user.username}
+                size="lg"
+                img="/resources/default-profile.png"
+                className="mr-3 rounded-sm"
+              />
+            </Link>
+          ) : (
+            <>
+              <Link
+                href={`/login?redirect=${currentURL}`}
+                className={buttonVariants({}) + "block px-4"}
+              >
+                로그인
+              </Link>
+              <ThemeChanger />
+            </>
+          )}
         </div>
       </div>
     </header>

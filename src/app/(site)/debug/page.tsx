@@ -1,5 +1,4 @@
 import DebugListItem from "@/components/section/debug/list-item";
-import DebugNotice from "@/components/section/debug/notice";
 import Link from "next/link";
 
 export default function Debug() {
@@ -9,7 +8,6 @@ export default function Debug() {
         <h1 className="font-bold text-3xl mb-5">CKGame Debuggers</h1>
         <p>당신이 알고 있는 게임스쿨의 버그를 제보해 주세요!</p>
       </div>
-      <DebugNotice />
       <div className="w-full my-5 flex flex-col gap-5">
         <div className="flex justify-between items-center my-5">
           <h3 className="font-bold text-lg">1개의 버그를 발견했어요!</h3>

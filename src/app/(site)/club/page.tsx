@@ -7,6 +7,9 @@ export default function Club() {
         <h1 className="font-bold text-3xl mb-5">전공 동아리</h1>
         <p>gd</p>
       </div>
+      <div className="flex justify-between items-center my-5">
+        <h3 className="font-bold text-lg">1개의 동아리를 발견했어요!</h3>
+      </div>
       <div className="grid grid-cols-4">
         <ClubItem
           title="채널링"
@@ -15,7 +18,7 @@ export default function Club() {
           bg="https://ckgamelab.com/wp-content/uploads/2025/02/2-1-e1740696666128.jpg"
         />
         <ClubItem
-          title="런닝 크루"
+          title="한얼"
           href="/"
           createdAt="2025년 3월 13일"
           bg="https://ckgamelab.com/wp-content/uploads/2025/02/12.jpg"
