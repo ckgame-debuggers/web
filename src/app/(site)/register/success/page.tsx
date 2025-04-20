@@ -4,7 +4,7 @@ import { useSearchParams } from "next/navigation";
 import ReactConfetti from "react-confetti";
 import { useWindowSize } from "react-use";
 
-export default function RegisterCertPage() {
+export default function RegisterSuccessPage() {
   const searchParams = useSearchParams();
   const { width, height } = useWindowSize();
   const name = searchParams.get("name");
