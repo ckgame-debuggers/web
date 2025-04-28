@@ -5,24 +5,19 @@ export default function Club() {
     <main className="mx-auto max-w-[1200px]">
       <div className=" my-14 text-center">
         <h1 className="font-bold text-3xl mb-5">전공 동아리</h1>
-        <p>gd</p>
+        <p>게임스쿨에서만 만나볼 수 있는 동아리들을 찾아보세요.</p>
       </div>
       <div className="flex justify-between items-center my-5">
-        <h3 className="font-bold text-lg">1개의 동아리를 발견했어요!</h3>
+        <h3 className="font-bold text-lg">0개의 동아리를 발견했어요!</h3>
       </div>
-      <div className="grid grid-cols-4">
-        <ClubItem
-          title="채널링"
-          href="/"
-          createdAt="2025년 3월 14일"
-          bg="https://ckgamelab.com/wp-content/uploads/2025/02/2-1-e1740696666128.jpg"
-        />
-        <ClubItem
-          title="한얼"
-          href="/"
-          createdAt="2025년 3월 13일"
-          bg="https://ckgamelab.com/wp-content/uploads/2025/02/12.jpg"
-        />
+      <div className="text-center my-20">
+        <p className="text-3xl font-semibold mb-3">
+          동아리 소개 페이지는 학생회가 관리할 거에요.
+        </p>
+        <p>
+          동아리를 등록하고 싶은 전공 동아리 기장분들은 학생회장에게 말씀해
+          주세요!
+        </p>
       </div>
     </main>
   );

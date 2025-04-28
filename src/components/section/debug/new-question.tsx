@@ -6,6 +6,8 @@ import { DebuggersAPI } from "@/components/util/api";
 import dynamic from "next/dynamic";
 import axios from "axios";
 import { useState, useCallback, useMemo } from "react";
+import workingImage from "$/resources/working.png";
+import Image from "next/image";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
   ssr: false,
@@ -111,6 +113,16 @@ export default function NewQuestionForm() {
       </div>
     ),
     []
+  );
+
+  return (
+    <div className="text-center w-full flex justify-center flex-col items-center my-30">
+      <div className="text-center flex flex-col gap-3">
+        <h1 className="font-bold text-3xl">공사 중인 페이지에요!</h1>
+        <p>불편을 드려 죄송합니다. 빠른 시일 내에 찾아올게요!</p>
+      </div>
+      <Image className="w-96" src={workingImage} alt="working" />
+    </div>
   );
 
   return (

@@ -5,23 +5,35 @@ import { Input } from "@/components/ui/input";
 import { DebuggersAPI } from "@/components/util/api";
 import dynamic from "next/dynamic";
 import axios from "axios";
-import { useState, useCallback, useMemo } from "react";
+import { useState, useCallback, useMemo, useEffect } from "react";
+import Selector from "@/components/ui/selector";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
   ssr: false,
   loading: () => <p>에디터를 불러오고 있습니다...</p>,
 });
 
+type CategoryType = { id: number; title: string };
+
+type FormDataType = {
+  title: string;
+  categoryId: number | null;
+  content: string;
+};
+
 export default function NewBugForm() {
   const [isLoading, setIsLoading] = useState(false);
   const [errorText, setErrorText] = useState("");
-  const [formData, setFormData] = useState({
+  const [categories, setCategories] = useState<CategoryType[]>([]);
+  const [formData, setFormData] = useState<FormDataType>({
     title: "",
+    categoryId: null,
     content: "",
   });
 
   const [errors, setErrors] = useState({
     title: "",
+    categoryId: "",
     content: "",
   });
 
@@ -51,6 +63,8 @@ export default function NewBugForm() {
 
       const newErrors = {
         title: formData.title === "" ? "버그 제목을 입력해주세요." : "",
+        categoryId:
+          formData.categoryId === null ? "카테고리를 선택해주세요." : "",
         content: formData.content === "" ? "버그 내용을 입력해주세요." : "",
       };
 
@@ -62,7 +76,13 @@ export default function NewBugForm() {
 
       setIsLoading(true);
       try {
-        await debuggersAPI.post(`/bug/report`, formData);
+        const requestData = {
+          title: formData.title,
+          categoryId: formData.categoryId,
+          contents: formData.content,
+        };
+
+        await debuggersAPI.post(`/debuggers`, requestData);
         window.location.href = "/debug";
       } catch (error) {
         if (axios.isAxiosError(error)) {
@@ -113,6 +133,16 @@ export default function NewBugForm() {
     []
   );
 
+  useEffect(() => {
+    const prepare = async () => {
+      const categories: CategoryType[] = (
+        await debuggersAPI.get("debuggers/categories")
+      ).data.data;
+      setCategories(categories);
+    };
+    prepare();
+  }, []);
+
   return (
     <form
       className="max-w-[900px] flex flex-col gap-10 mx-auto"
@@ -130,6 +160,35 @@ export default function NewBugForm() {
             <p className="text-sm text-red-500 mt-1">{errors.title}</p>
           )}
         </div>
+        {categories.length === 0 ? (
+          <div>
+            <div className="flex items-center justify-between px-4 py-2 text-sm border border-border rounded-md bg-background hover:bg-accent w-full">
+              카테고리를 로드하고 있습니다..
+            </div>
+          </div>
+        ) : (
+          <div>
+            <Selector
+              placeholder="카테고리를 선택해 주세요."
+              onSelect={(value) => {
+                setFormData((prev) => ({
+                  ...prev,
+                  categoryId: parseInt(value),
+                }));
+                setErrors((prev) => ({ ...prev, categoryId: "" }));
+              }}
+            >
+              {categories.map((category) => (
+                <Selector.Item key={category.id} value={`${category.id}`}>
+                  {category.title}
+                </Selector.Item>
+              ))}
+            </Selector>
+            {errors.categoryId && (
+              <p className="text-sm text-red-500 mt-1">{errors.categoryId}</p>
+            )}
+          </div>
+        )}
         <div>
           <ReactQuill
             theme="snow"

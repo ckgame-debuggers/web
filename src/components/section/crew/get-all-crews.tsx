@@ -1,8 +1,11 @@
 "use client";
 
 import { DebuggersAPI } from "@/components/util/api";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+
+import notFoundImage from "$/resources/notfound.png";
 
 export default function GetAllCrews() {
   const [crews, setCrews] = useState<CrewType[]>([]);
@@ -32,19 +35,28 @@ export default function GetAllCrews() {
         </Link>
       </div>
       <div>
-        {crews.map((crew, i) => (
-          <div key={i}>
-            <CrewItem
-              title={crew.title}
-              href={`/crew/${crew.id}`}
-              createdAt={crew.createdAt}
-              key={i}
-            />
-            {i !== crews.length - 1 && (
-              <div className="w-full h-[1px] bg-border" />
-            )}
+        {crews.length === 0 ? (
+          <div className="flex flex-col items-center justify-center w-full my-10">
+            <Image className="w-52" src={notFoundImage} alt="not-found" />
+            <p className="text-secondary-foreground">
+              여기엔 아무것도 없는 것 같아요..
+            </p>
           </div>
-        ))}
+        ) : (
+          crews.map((crew, i) => (
+            <div key={i}>
+              <CrewItem
+                title={crew.title}
+                href={`/crew/${crew.id}`}
+                createdAt={crew.createdAt}
+                key={i}
+              />
+              {i !== crews.length - 1 && (
+                <div className="w-full h-[1px] bg-border" />
+              )}
+            </div>
+          ))
+        )}
       </div>
     </>
   );
