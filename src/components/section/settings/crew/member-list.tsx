@@ -12,7 +12,13 @@ type CrewMemberType = {
   };
 };
 
-export default function SettingCrewMemberList({ id }: { id: string }) {
+export default function SettingCrewMemberList({
+  id,
+  perm,
+}: {
+  id: string;
+  perm: string;
+}) {
   const [crewMember, setCrewMember] = useState<CrewMemberType[]>([]);
   const debuggersApi = DebuggersAPI.getInstance();
   useEffect(() => {
@@ -36,6 +42,7 @@ export default function SettingCrewMemberList({ id }: { id: string }) {
             name={crewMember.user.fullname}
             permission={crewMember.permission}
             schoolNumber={crewMember.user.schoolNumber}
+            userPermission={perm}
             key={i}
           />
         ))}

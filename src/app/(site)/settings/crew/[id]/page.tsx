@@ -75,7 +75,10 @@ export default function SettingCrewItemPage() {
           ) : (
             <></>
           )}
-          <SettingCrewMemberList id={id?.toString() || ""} perm={permission} />
+          <SettingCrewMemberList
+            id={id?.toString() || ""}
+            perm={permission as string}
+          />
         </div>
       )}
     </main>
