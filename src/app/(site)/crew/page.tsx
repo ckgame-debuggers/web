@@ -1,5 +1,4 @@
 import GetAllCrews from "@/components/section/crew/get-all-crews";
-import Link from "next/link";
 
 export default function Crew() {
   return (

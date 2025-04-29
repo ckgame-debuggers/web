@@ -1,6 +1,5 @@
 "use client";
 import { buttonVariants } from "@/components/ui/button";
-import ThemeChanger from "@/components/ui/theme-changer";
 import Link from "next/link";
 
 export default function AdminHeader() {
