@@ -24,7 +24,12 @@ const withRefresh = <T extends (...args: any[]) => Promise<any>>(
           await axios.post(
             `${BASE_URL}/auth/refresh`,
             {},
-            { withCredentials: true }
+            {
+              withCredentials: true,
+              headers: {
+                "Access-Control-Allow-Origin": "https://ckdebuggers.com",
+              },
+            }
           );
           return await method.apply(this, args);
         } catch (refreshError) {
@@ -45,6 +50,12 @@ export class DebuggersAPI {
       baseURL: BASE_URL,
       withCredentials: true,
       timeout: 5000,
+      headers: {
+        "Access-Control-Allow-Origin": "https://ckdebuggers.com",
+        "Access-Control-Allow-Credentials": "true",
+        "Access-Control-Allow-Methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
+        "Access-Control-Allow-Headers": "Content-Type, Accept",
+      },
     });
   }
 
