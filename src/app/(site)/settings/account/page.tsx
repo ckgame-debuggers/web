@@ -2,8 +2,10 @@ import SettingEmailChange from "@/components/section/settings/account/email";
 import SettingFullnameChange from "@/components/section/settings/account/fullname";
 import SettingPhoneNumberChange from "@/components/section/settings/account/phonenumber";
 import SettingUsernameChange from "@/components/section/settings/account/username";
+import useUserStore from "@/store/user";
 
 export default function AccountSetting() {
+  const { user } = useUserStore();
   return (
     <main className="py-5">
       <div>
@@ -17,15 +19,7 @@ export default function AccountSetting() {
         <div className="flex flex-col">
           <SettingEmailChange />
           <Devider />
-          <SettingPhoneNumberChange phoneNumber="01040551202" />
-        </div>
-      </div>
-      <div className="flex flex-col gap-4 my-10">
-        <h2 className="font-semibold text-xl">계정 정보 설정</h2>
-        <div className="flex flex-col">
           <SettingUsernameChange />
-          <Devider />
-          <SettingFullnameChange fullName="이규연" />
         </div>
       </div>
     </main>
