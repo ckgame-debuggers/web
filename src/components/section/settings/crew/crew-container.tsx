@@ -45,15 +45,7 @@ export default function SettingCrewContainer() {
             <div key={i} className="w-full">
               <SettingCrewItem
                 crew={{
-                  id: 1,
-                  isRecruiting: true,
-                  maxPeople: 10,
-                  title: crew.title,
-                  description:
-                    crew.description.length > 20
-                      ? crew.description.slice(0, 20) + "..."
-                      : crew.description,
-                  createdAt: "2024-01-01",
+                  ...crew,
                 }}
               />
               {i < crews.length - 1 ? (
