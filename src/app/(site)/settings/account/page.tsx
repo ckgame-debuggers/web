@@ -1,11 +1,7 @@
 import SettingEmailChange from "@/components/section/settings/account/email";
-import SettingFullnameChange from "@/components/section/settings/account/fullname";
-import SettingPhoneNumberChange from "@/components/section/settings/account/phonenumber";
 import SettingUsernameChange from "@/components/section/settings/account/username";
-import useUserStore from "@/store/user";
 
 export default function AccountSetting() {
-  const { user } = useUserStore();
   return (
     <main className="py-5">
       <div>
