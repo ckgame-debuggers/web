@@ -48,8 +48,11 @@ export default function SettingCrewContainer() {
                   id: 1,
                   isRecruiting: true,
                   maxPeople: 10,
-                  title: "런닝 크루",
-                  description: "함께 달리며 건강을 챙기는 크루입니다.",
+                  title: crew.title,
+                  description:
+                    crew.description.length > 20
+                      ? crew.description.slice(0, 20) + "..."
+                      : crew.description,
                   createdAt: "2024-01-01",
                 }}
               />

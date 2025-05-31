@@ -6,7 +6,7 @@ export default function Debug() {
   return (
     <main className="mx-auto max-w-[1200px]">
       <div className=" my-14 text-center">
-        <h1 className="font-bold text-3xl mb-5">CKGame Debuggers</h1>
+        <h1 className="font-bold text-3xl mb-5">CKGame Debugger</h1>
         <p>당신이 알고 있는 게임스쿨의 버그를 제보해 주세요!</p>
       </div>
       <div className="w-full my-5 flex flex-col gap-5">
