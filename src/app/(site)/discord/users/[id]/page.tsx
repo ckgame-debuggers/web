@@ -2,9 +2,11 @@
 
 import Link from "next/link";
 import { useEffect } from "react";
+import { useParams } from "next/navigation";
 
-export default function DiscordPage({ params }: { params: { id: string } }) {
-  const { id } = params;
+export default function DiscordPage() {
+  const params = useParams();
+  const id = params.id as string;
   useEffect(() => {
     setTimeout(() => {
       if (typeof window !== "undefined") {
