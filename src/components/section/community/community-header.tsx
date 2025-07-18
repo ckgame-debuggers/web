@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import Link from "next/link";
-import SearchBar from "@/components/ui/search-bar";
+import SearchBar from "@/components/ui/community/search-bar";
 import ThemeChanger from "@/components/ui/theme-changer";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { DebuggersAPI } from "@/components/util/api";
@@ -51,6 +51,7 @@ export default function CommunityHeader() {
             <Link
               href="/community/hot"
               className={buttonVariants({ variants: "ghost" })}
+              style={{ borderRadius: "100%" }}
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -76,7 +77,7 @@ export default function CommunityHeader() {
         </div>
         <div className="flex items-center gap-1">
           {isLoggedIn ? (
-            <Link href={"/settings"} className="flex items-center">
+            <Link href={"/settings/community"} className="flex items-center">
               <Avatar
                 displayName={user.username}
                 size="lg"

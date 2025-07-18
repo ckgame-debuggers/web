@@ -1,5 +1,6 @@
 import CommunityHeader from "@/components/section/community/community-header";
 import GlobalFooter from "@/components/section/global/global-footer";
+import CommunityBody from "@/components/ui/community/body";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -30,7 +31,7 @@ export default function CommunityLayout({
   return (
     <>
       <CommunityHeader />
-      {children}
+      <CommunityBody>{children}</CommunityBody>
       <GlobalFooter />
     </>
   );
