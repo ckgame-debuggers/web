@@ -4,6 +4,8 @@ import { ThemeProvider } from "@/components/ui/theme-provider";
 
 import "@/styles/globals.css";
 import "@/styles/quill-theme.css";
+import { CarrotTyper } from "@/components/util/carrot-typer";
+import ConsoleWriter from "@/components/util/console";
 
 const fontSans = Noto_Sans_KR({
   weight: ["400", "700"],
@@ -40,6 +42,8 @@ export default function RootLayout({
     <html lang="ko-KR">
       <body className={`${fontSans.className} antialiased`}>
         <ThemeProvider defaultTheme="system" enableSystem attribute="class">
+          <CarrotTyper />
+          <ConsoleWriter />
           {children}
         </ThemeProvider>
       </body>

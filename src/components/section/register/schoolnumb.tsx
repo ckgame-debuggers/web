@@ -2,8 +2,8 @@
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import axios from "axios";
 import { useState } from "react";
+import { DebuggersAPI } from "@/components/util/api";
 
 export default function RegisterSchoolNumbForm() {
   const [isLoading, setLoading] = useState(false);
@@ -30,15 +30,10 @@ export default function RegisterSchoolNumbForm() {
     }
     setLoading(true);
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/smtp/cert`,
-        {
-          email: `${value}@chungkang.academy`,
-        },
-        {
-          withCredentials: true,
-        }
-      );
+      const api = DebuggersAPI.getInstance();
+      await api.post("/smtp/cert", {
+        email: `${value}@chungkang.academy`,
+      });
       window.location.href = `/register/cert?schoolnumber=${value}`;
     } catch (error: any) {
       if (

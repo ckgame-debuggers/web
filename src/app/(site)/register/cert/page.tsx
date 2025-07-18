@@ -15,7 +15,10 @@ export default function RegisterCertPage() {
         전송된 이메일을 활용해 이메일을 인증해 주세요.
         <br />
         <br />
-        이메일을 받지 못하셨다면, 스팸함을 확인해 주세요!
+        이메일을 받지 못하셨다면,{" "}
+        <span className="font-bold text-primary">스팸함을 확인</span>해 주세요!
+        <br />
+        인증 메일은 3분 동안만 유효합니다.
       </p>
       <Link
         className="mt-5 underline hover:text-primary"

@@ -1,9 +1,15 @@
 import SettingRemote from "@/components/section/settings/remote";
+import RequireLogin from "@/components/util/require-login";
 
 export default function SettingLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return <SettingRemote>{children}</SettingRemote>;
+  return (
+    <>
+      <RequireLogin />
+      <SettingRemote>{children}</SettingRemote>
+    </>
+  );
 }

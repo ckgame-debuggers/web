@@ -93,10 +93,7 @@ export default function RegisterContinuePage() {
 
     setIsLoading(true);
     try {
-      await axios.post(
-        `${process.env.NEXT_PUBLIC_BACKEND_URL}/auth/register`,
-        finalDataToSubmit
-      );
+      await axios.post(`/api/auth/register`, finalDataToSubmit);
     } catch (error) {
       if (axios.isAxiosError(error)) {
         if (error.response?.data.message === "Invalid certification code.") {

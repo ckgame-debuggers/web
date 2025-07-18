@@ -45,6 +45,10 @@ export default function GlobalMobileHeaderMenu({
           <MobileHeaderItem href={"/debug"}>디버그</MobileHeaderItem>
           <MobileHeaderItem href={"/club"}>전공동아리</MobileHeaderItem>
           <MobileHeaderItem href={"/crew"}>소모임</MobileHeaderItem>
+          <MobileHeaderItem href={"/community"}>커뮤니티</MobileHeaderItem>
+          <MobileHeaderItem href={"http://wiki.ckdebuggers.com/"}>
+            위키
+          </MobileHeaderItem>
         </div>
         <div className="mx-15">
           <p>Copyright © 2025. Debuggers.</p>
@@ -74,6 +78,7 @@ function MobileHeaderItem({
   return (
     <Link
       href={href}
+      target={href.startsWith("/") ? "_self" : "_blank"}
       className="border-t-background hover:border-t-primary border-l-5 h-full hover:text-primary px-3"
       style={{
         borderLeftColor: path.startsWith(href)

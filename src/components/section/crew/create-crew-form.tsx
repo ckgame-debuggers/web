@@ -5,7 +5,6 @@ import { Input } from "@/components/ui/input";
 import { DebuggersAPI } from "@/components/util/api";
 import axios from "axios";
 import { useState, useMemo, useCallback } from "react";
-import { Checkbox } from "@/components/ui/checkbox";
 import dynamic from "next/dynamic";
 
 const ReactQuill = dynamic(() => import("react-quill-new"), {
@@ -144,10 +143,10 @@ export default function CreateCrewForm() {
           )}
         </div>
         <div className="flex items-center gap-2">
-          <Checkbox
+          <input
             id="isRecruiting"
             checked={formData.isRecruiting}
-            onCheckedChange={handleCheckboxChange}
+            onChange={handleCheckboxChange}
           />
           <label htmlFor="isRecruiting">
             검토 완료 후 바로 모집을 시작하시겠습니까?

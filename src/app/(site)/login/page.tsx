@@ -176,12 +176,23 @@ export default function LoginPage() {
         {errorText !== "" && (
           <p className="text-sm text-red-500 mt-[-20px]">{errorText}</p>
         )}
-        <p className="text-sm mt-[-20px]">
-          계정이 없으신가요?{" "}
-          <Link href={"/register"} className="underline hover:text-primary">
-            회원가입
-          </Link>
-        </p>
+        <div className="text-sm mt-[-20px] flex flex-col gap-5 items-center md:flex-row md:justify-between">
+          <p>
+            계정이 없으신가요?{" "}
+            <Link href={"/register"} className="underline hover:text-primary">
+              회원가입
+            </Link>
+          </p>
+          <p>
+            아니면..{" "}
+            <Link
+              href={"/find/password"}
+              className="underline hover:text-primary"
+            >
+              비밀번호를 잊으셨나요?
+            </Link>
+          </p>
+        </div>
       </form>
     </main>
   );

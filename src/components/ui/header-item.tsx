@@ -23,6 +23,7 @@ export default function HeaderItems({
   return (
     <Link
       href={href}
+      target={href.startsWith("/") ? "_self" : "_blank"}
       className="border-t-background hover:border-t-primary border-t-5 h-full px-5 py-8 hover:text-primary"
       style={{
         borderTopColor: path.startsWith(href)

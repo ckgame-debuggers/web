@@ -6,6 +6,19 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
+  async rewrites() {
+    if (!process.env.NEXT_PUBLIC_BACKEND_URL) {
+      throw new Error(
+        "NEXT_PUBLIC_API_BASE_URL environment variable is not defined"
+      );
+    }
+    return [
+      {
+        source: "/api/:path*",
+        destination: `${process.env.NEXT_PUBLIC_BACKEND_URL}/:path*`,
+      },
+    ];
+  },
 };
 
 export default withSentryConfig(nextConfig, {

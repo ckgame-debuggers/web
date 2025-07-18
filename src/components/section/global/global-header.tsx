@@ -10,10 +10,10 @@ import Avatar from "@/components/ui/avatar";
 import useUserStore from "@/store/user";
 
 import logo from "$/brand/logo.png";
-import GlobalMobileHeaderMenu from "./\bglobal-mobile-header-menu";
+import GlobalMobileHeaderMenu from "./global-mobile-header-menu";
+import { usePathname } from "next/navigation";
 export default function GlobalHeader() {
   const { user, setUser, isLoggedIn } = useUserStore();
-  const [headerHeight, setHeaderHeight] = useState(0);
   const [isOpen, setIsOpen] = useState(false);
   const header = useRef<HTMLDivElement>(null);
   const currentURL = useMemo<string>(() => {
@@ -22,6 +22,8 @@ export default function GlobalHeader() {
     if (location.includes("/register")) return "/";
     return location;
   }, []);
+
+  const pathname = usePathname();
 
   const debuggersAPI = DebuggersAPI.getInstance();
   useEffect(() => {
@@ -32,7 +34,9 @@ export default function GlobalHeader() {
     fetchUser();
   }, [debuggersAPI]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setIsOpen(false);
+  }, [pathname]);
 
   return (
     <header>
@@ -51,7 +55,8 @@ export default function GlobalHeader() {
           <HeaderItems href={"/debug"}>디버그</HeaderItems>
           <HeaderItems href={"/club"}>전공동아리</HeaderItems>
           <HeaderItems href={"/crew"}>소모임</HeaderItems>
-          <HeaderItems href={"/under-develop"}>커뮤니티</HeaderItems>
+          <HeaderItems href={"/community"}>커뮤니티</HeaderItems>
+          <HeaderItems href={"http://wiki.ckdebuggers.com/"}>위키</HeaderItems>
         </div>
         <div className="items-center gap-1 hidden md:flex">
           {isLoggedIn ? (

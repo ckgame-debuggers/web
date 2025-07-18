@@ -1,5 +1,6 @@
 import Link from "next/link";
 import SettingRemoteUrl from "./setting-remote-url";
+import RequireLogin from "@/components/util/require-login";
 
 export default function SettingRemote({
   children,
@@ -8,6 +9,7 @@ export default function SettingRemote({
 }>) {
   return (
     <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row">
+      <RequireLogin />
       <div className="flex flex-col min-w-40 md:sticky top-0 h-fit">
         <SettingRemoteUrl href="/settings">홈</SettingRemoteUrl>
         <SettingRemoteUrl href="/settings/account">계정 정보</SettingRemoteUrl>

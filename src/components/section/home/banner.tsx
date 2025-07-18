@@ -6,10 +6,16 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
-import { Fragment } from "react";
+import { Fragment, useEffect } from "react";
 import Link from "next/link";
+import { DebuggersAPI } from "@/components/util/api";
 
 export default function HomeBanner() {
+  const debuggersAPI = DebuggersAPI.getInstance();
+  useEffect(() => {
+    const prepare = async () => {};
+    prepare();
+  }, []);
   return (
     <Swiper
       spaceBetween={30}

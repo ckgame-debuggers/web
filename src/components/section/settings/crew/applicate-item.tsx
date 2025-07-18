@@ -43,7 +43,9 @@ export default function SettingCrewApplicateItem({
         }}
         className="flex justify-between p-3 bg-background relative z-10 cursor-pointer"
       >
-        <h4>202513158 이규연</h4>
+        <h4>
+          {} {}
+        </h4>
         <div className="flex gap-3 items-center">
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -73,7 +75,7 @@ export default function SettingCrewApplicateItem({
       >
         <div ref={contentRef} className="p-3 flex flex-col gap-2">
           <p className="font-semibold text-lg mb-3">지원동기</p>
-          <p>열심히할게여ㅛ 수고정</p>
+          <p>{applicate.motivation}</p>
           <div className="flex gap-2 mt-3">
             <Button className="flex-1" size="sm" onClick={acceptApplicate}>
               합격

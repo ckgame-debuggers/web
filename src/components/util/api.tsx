@@ -1,7 +1,5 @@
 import axios, { AxiosInstance, AxiosResponse } from "axios";
 
-const BASE_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
-
 interface LoginProps {
   email: string;
   password: string;
@@ -16,19 +14,17 @@ const withRefresh = <T extends (...args: any[]) => Promise<any>>(
     this: DebuggersAPI,
     ...args: Parameters<T>
   ): Promise<ReturnType<T>> {
+    console.log(window.location.origin);
     try {
       return await method.apply(this, args);
     } catch (error: any) {
       if (error.response?.status === 403) {
         try {
           await axios.post(
-            `${BASE_URL}/auth/refresh`,
+            `/api/auth/refresh`,
             {},
             {
               withCredentials: true,
-              headers: {
-                "Access-Control-Allow-Origin": "https://ckdebuggers.com",
-              },
             }
           );
           return await method.apply(this, args);
@@ -47,15 +43,8 @@ export class DebuggersAPI {
 
   private constructor() {
     this.axiosInstance = axios.create({
-      baseURL: BASE_URL,
       withCredentials: true,
       timeout: 5000,
-      headers: {
-        "Access-Control-Allow-Origin": "https://ckdebuggers.com",
-        "Access-Control-Allow-Credentials": "true",
-        "Access-Control-Allow-Methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
-        "Access-Control-Allow-Headers": "Content-Type, Accept",
-      },
     });
   }
 
@@ -67,35 +56,43 @@ export class DebuggersAPI {
   }
 
   async login(props: LoginProps): Promise<void> {
-    await this.axiosInstance.post("/auth/login", props);
+    await this.axiosInstance.post("/api/auth/login", props);
   }
 
   isLoggedIn = withRefresh(async (): Promise<JWTPayLoad | undefined> => {
-    const { data } = await this.axiosInstance.get("/auth/authenticate");
+    const { data } = await this.axiosInstance.get("/api/auth/authenticate");
     return data;
   });
 
+  private normalizePath(path: string): string {
+    return path.startsWith("/") ? path.slice(1) : path;
+  }
+
   get = withRefresh(
     async <T = any,>(path: string): Promise<AxiosResponse<T>> => {
-      return this.axiosInstance.get(path);
+      const normalizedPath = this.normalizePath(path);
+      return this.axiosInstance.get(`/api/${normalizedPath}`);
     }
   );
 
   post = withRefresh(
     async <T = any,>(path: string, data: any): Promise<AxiosResponse<T>> => {
-      return this.axiosInstance.post(path, data);
+      const normalizedPath = this.normalizePath(path);
+      return this.axiosInstance.post(`/api/${normalizedPath}`, data);
     }
   );
 
   patch = withRefresh(
     async <T = any,>(path: string, data: any): Promise<AxiosResponse<T>> => {
-      return this.axiosInstance.patch(path, data);
+      const normalizedPath = this.normalizePath(path);
+      return this.axiosInstance.patch(`/api/${normalizedPath}`, data);
     }
   );
 
   delete = withRefresh(
     async <T = any,>(path: string): Promise<AxiosResponse<T>> => {
-      return this.axiosInstance.delete(path);
+      const normalizedPath = this.normalizePath(path);
+      return this.axiosInstance.delete(`/api/${normalizedPath}`);
     }
   );
 }
