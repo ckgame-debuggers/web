@@ -24,7 +24,6 @@ export default function AuthChallengePage() {
   const clientId = searchParams.get("client_id");
   const responseType = searchParams.get("response_type");
   const redirectsTo = searchParams.get("redirects_to");
-  const nonce = searchParams.get("nonce");
   const state = searchParams.get("state");
   const [app, setApplication] = useState<application | null>(null);
   const [loading, setLoading] = useState(false);
@@ -59,7 +58,7 @@ export default function AuthChallengePage() {
       } catch (e: any) {
         console.log(e.response);
         if (e.response?.status === 409) {
-          window.location.href = `/oauth/connected?client_id=${clientId}&redirects_to=${redirectsTo}  ${state ? `&state=${state}` : ""}`;
+          window.location.href = `/oauth/connected?client_id=${clientId}&redirects_to=${redirectsTo}${state ? `&state=${state}` : ""}`;
           return;
         }
         setError(e.message);
@@ -104,7 +103,6 @@ export default function AuthChallengePage() {
         agreed: agreed,
         redirect_to: redirectsTo,
       };
-      if (nonce) data.nonce = nonce;
       await debuggersApi.post("/public/oauth/authorization", data);
       window.location.href = `/oauth/connected?client_id=${clientId}&redirects_to=${redirectsTo}${state ? `&state=${state}` : ""}`;
     } catch (e: any) {

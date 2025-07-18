@@ -41,7 +41,7 @@ export default function BannedPage() {
       <p className="text-xs text-center text-secondary-foreground">
         귀하는 디버거즈 커뮤니티의 이용이 제한되었습니다.
         <br />
-        더욱 클린한 학교 커뮤니티의 운영 방침에 의거하여,
+        더욱 클린한 학교 커뮤니티의 운영을 위해,
         <br />
         9999-12-31까지 이용이 제한됩니다.
       </p>
