@@ -25,12 +25,16 @@ export default function GlobalFooter() {
         <li>
           <h5>Resources</h5>
           <div className="my-3 flex flex-col text-sm text-secondary-foreground">
-            <Link href={"http://wiki.ckdebuggers.com/"}>개발자 문서</Link>
-            <Link href={"http://wiki.ckdebuggers.com/"}>디버거즈 커뮤니티</Link>
+            <Link href={"http://developers.ckdebuggers.com/"}>개발자 문서</Link>
+            <Link href={"/community"}>디버거즈 커뮤니티</Link>
+            <Link href={"/credit"}>크레딧</Link>
           </div>
         </li>
         <li>
           <h5>Social</h5>
+          <div className="my-3 flex flex-col text-sm text-secondary-foreground">
+            <Link href={"http://wiki.ckdebuggers.com/"}>디버거즈 커뮤니티</Link>
+          </div>
         </li>
       </ul>
       <div className="px-5 max-w-[1200px] text-secondary-foreground w-full mx-auto flex justify-between">

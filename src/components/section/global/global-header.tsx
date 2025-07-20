@@ -13,7 +13,7 @@ import logo from "$/brand/logo.png";
 import GlobalMobileHeaderMenu from "./global-mobile-header-menu";
 import { usePathname } from "next/navigation";
 export default function GlobalHeader() {
-  const { user, setUser, isLoggedIn } = useUserStore();
+  const { user, setUser, isLoggedIn, profile } = useUserStore();
   const [isOpen, setIsOpen] = useState(false);
   const header = useRef<HTMLDivElement>(null);
   const currentURL = useMemo<string>(() => {
@@ -65,7 +65,7 @@ export default function GlobalHeader() {
                 <Avatar
                   displayName={user.username}
                   size="lg"
-                  img="/resources/default-profile.png"
+                  img={profile}
                   className="mr-3 rounded-sm"
                 />
               </Link>

@@ -18,7 +18,7 @@ export default function CkGameDebugger() {
   }, []);
   return (
     <section className="mb-10 mt-16 max-w-[1200px] mx-auto">
-      <div className="flex justify-around my-10">
+      <div className="grid grid-cols-2 md:grid-cols-4 my-10 gap-5 w-fit md:w-auto mx-auto">
         <div className="flex flex-col items-center">
           <p>해결한 버그</p>
           <div className="flex items-end">

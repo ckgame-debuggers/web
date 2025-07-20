@@ -3,4 +3,6 @@ type JWTPayLoad = {
   username: string;
   email: string;
   schoolNumber: string;
+  color: string;
+  profile?: string;
 };

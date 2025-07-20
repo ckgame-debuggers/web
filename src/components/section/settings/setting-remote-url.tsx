@@ -41,6 +41,7 @@ export default function SettingRemoteUrl({
       className="py-2 px-5 rounded-sm transition-colors"
       style={{
         backgroundColor: href === pathname ? "var(--primary)" : "inherit",
+        color: href === pathname ? "white" : "inherit",
       }}
       onMouseEnter={(e) => {
         if (href !== pathname) {

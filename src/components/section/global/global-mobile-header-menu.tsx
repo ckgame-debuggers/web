@@ -13,7 +13,8 @@ export default function GlobalMobileHeaderMenu({
 }: {
   isOpen: boolean;
 }) {
-  const { isLoggedIn, user } = useUserStore();
+  const { isLoggedIn, user, profile } = useUserStore();
+
   return (
     <div
       className="md:hidden h-0 overflow-hidden fixed z-40 bg-background w-full top-0 left-0 transition-all duration-500 ease-in-out"
@@ -29,7 +30,7 @@ export default function GlobalMobileHeaderMenu({
               <Avatar
                 displayName={user.username}
                 size="lg"
-                img="/resources/default-profile.png"
+                img={profile}
                 className="mr-3 rounded-sm"
               />
               <p>{josa(user.username, "으로/로")} 로그인됨.</p>

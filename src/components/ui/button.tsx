@@ -30,12 +30,12 @@ export function buttonVariants({
     default:
       "font-normal text-primary-foreground bg-primary hover:opacity-70 bg-background border-primary border",
     outline: "border border-border hover:bg-white/40 bg-background",
-    destructive: "font-bold bg-red-500 hover:opacity-90",
+    destructive: "font-bold bg-red-500 hover:opacity-90 text-white",
     ghost: "hover:bg-foreground/10 cursor-pointer",
   };
 
   const sizes = {
-    sm: "px-2 py-1 text-xs rounded-md",
+    sm: "px-2 py-2 text-xs rounded-md",
     md: "px-2 py-2 text-sm rounded-md",
     lg: "px-3 py-3 text-base rounded-lg",
   };

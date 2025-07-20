@@ -1,6 +1,7 @@
-import CommunityHeader from "@/components/section/community/community-header";
+import CommunityHeader from "@/components/community/global/community-header";
 import GlobalFooter from "@/components/section/global/global-footer";
 import CommunityBody from "@/components/ui/community/body";
+import LoadCommunityInfo from "@/components/util/load-communit-user-info";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -30,6 +31,7 @@ export default function CommunityLayout({
 }>) {
   return (
     <>
+      <LoadCommunityInfo />
       <CommunityHeader />
       <CommunityBody>{children}</CommunityBody>
       <GlobalFooter />

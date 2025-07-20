@@ -5,7 +5,7 @@ import SearchBar from "@/components/ui/community/search-bar";
 import ThemeChanger from "@/components/ui/theme-changer";
 import { Button, buttonVariants } from "@/components/ui/button";
 import { DebuggersAPI } from "@/components/util/api";
-import { useEffect, useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
 import useUserStore from "@/store/user";
 
 import logo from "$/brand/logo.png";
@@ -13,7 +13,7 @@ import Avatar from "@/components/ui/avatar";
 import { josa } from "es-hangul";
 
 export default function CommunityHeader() {
-  const { user, setUser, isLoggedIn } = useUserStore();
+  const { user, setUser, isLoggedIn, profile } = useUserStore();
 
   const currentURL = useMemo<string>(() => {
     const location = window.location.href;
@@ -33,7 +33,7 @@ export default function CommunityHeader() {
 
   return (
     <header
-      className="border-b border-b-border py-3 px-3"
+      className="border-b border-b-border py-3 px-8"
       id="community-header"
     >
       <div className="max-w-[1200px] mx-auto flex justify-between items-center gap-5">
@@ -81,7 +81,7 @@ export default function CommunityHeader() {
               <Avatar
                 displayName={user.username}
                 size="lg"
-                img="/resources/default-profile.png"
+                img={profile}
                 className="mr-3 rounded-sm"
               />
             </Link>
