@@ -6,7 +6,7 @@ import useCommunityStore from "@/store/community";
 import { DebuggersAPI } from "./api";
 import useUserStore from "@/store/user";
 
-export default function RequireLogin() {
+export default function xLoadCommunityInfo() {
   const { setCommunityUserInfo } = useCommunityStore();
   const { isLoading, isLoggedIn } = useUserStore();
   const debuggersAPI = DebuggersAPI.getInstance();
@@ -18,6 +18,9 @@ export default function RequireLogin() {
         const data: CommunityUserInfoType = (
           await debuggersAPI.get("/community/me")
         ).data?.data as CommunityUserInfoType;
+        if (data.isBanned) {
+          window.location.href = `/community/banned${data.banExpiresAt ? `?for=${data.banExpiresAt}` : ""}`;
+        }
         setCommunityUserInfo(data);
       } catch (e) {}
     };

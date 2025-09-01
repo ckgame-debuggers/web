@@ -29,7 +29,6 @@ type DiscordData = {
 
 type DiscordProfile = {
   imageUrl: string;
-  profileUrl: string;
 };
 
 export default function HomeDiscordSection() {
@@ -117,7 +116,7 @@ export default function HomeDiscordSection() {
             )}
             {discord && (
               <AvatarCircles
-                numPeople={discord.members.length}
+                numPeople={discord.members.length - 5}
                 avatarUrls={avatars}
               />
             )}

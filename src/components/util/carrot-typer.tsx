@@ -8,6 +8,15 @@ export function CarrotTyper() {
     const target = "carrot";
 
     const handleKeyPress = (e: KeyboardEvent) => {
+      const activeElement = document.activeElement;
+      console.log(activeElement?.tagName);
+      if (
+        activeElement?.tagName === "INPUT" ||
+        activeElement?.tagName === "TEXTAREA"
+      ) {
+        return;
+      }
+
       typedText += e.key;
 
       if (typedText.length > target.length) {

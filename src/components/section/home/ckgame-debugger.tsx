@@ -5,26 +5,34 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export default function CkGameDebugger() {
-  const [solvedCount, setSolvedCount] = useState(0);
+  const [infos, setInfos] = useState<{
+    userCount: number;
+    debugCount: number;
+    eventCount: number;
+    crewCount: number;
+  }>();
   const debuggersAPI = DebuggersAPI.getInstance();
   useEffect(() => {
     const prepare = async () => {
-      const foundSolvedCount = (
-        await debuggersAPI.get("/global/solved-bug-count")
-      ).data.data as number;
-      setSolvedCount(foundSolvedCount ?? 0);
+      const data = (await debuggersAPI.get("/global/infos")).data as {
+        userCount: number;
+        debugCount: number;
+        eventCount: number;
+        crewCount: number;
+      };
+      setInfos(data);
     };
     prepare();
   }, []);
   return (
     <section className="mb-10 mt-16 max-w-[1200px] mx-auto">
-      <div className="grid grid-cols-2 md:grid-cols-4 my-10 gap-5 w-fit md:w-auto mx-auto">
+      <div className="grid grid-cols-2 sm:grid-cols-4 my-10 gap-5 w-fit md:w-auto mx-auto">
         <div className="flex flex-col items-center">
           <p>해결한 버그</p>
           <div className="flex items-end">
             <NumberTicker
               className="font-bold text-primary text-7xl"
-              value={solvedCount}
+              value={infos ? infos.debugCount : 0}
             />
             <p>개</p>
           </div>
@@ -33,20 +41,20 @@ export default function CkGameDebugger() {
           </Link>
         </div>
         <div className="flex flex-col items-center">
-          <p>운영 중인 서비스</p>
+          <p>운영 중인 소모임</p>
           <div className="flex items-end">
             <NumberTicker
               className="font-bold text-primary text-7xl"
-              value={5}
+              value={infos ? infos.crewCount : 0}
             />
             <p>개</p>
           </div>
           <Link
-            href={"https://cafe.naver.com/f-e/cafes/22694512/menus/98"}
+            href={"/crew"}
             className="mt-5 text-secondary-foreground"
             target="_blank"
           >
-            카페 확인하기
+            소모임 확인하기
           </Link>
         </div>
         <div className="flex flex-col items-center">
@@ -54,7 +62,7 @@ export default function CkGameDebugger() {
           <div className="flex items-end">
             <NumberTicker
               className="font-bold text-primary text-7xl"
-              value={23}
+              value={infos ? infos.eventCount : 0}
             />
             <p>개</p>
           </div>
@@ -71,7 +79,7 @@ export default function CkGameDebugger() {
           <div className="flex items-end">
             <NumberTicker
               className="font-bold text-primary text-7xl"
-              value={42}
+              value={infos ? infos.userCount : 0}
             />
             <p>명</p>
           </div>

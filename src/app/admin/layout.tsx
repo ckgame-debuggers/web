@@ -1,6 +1,6 @@
 import GlobalFooter from "@/components/section/global/global-footer";
-import AdminHeader from "@/components/section/admin/admin-header";
-import AdminSideBar from "@/components/section/admin/admin-sidebar";
+import AdminHeader from "@/components/admin/admin-header";
+import AdminSideBar from "@/components/admin/admin-sidebar";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -32,7 +32,7 @@ export default function RootLayout({
       <AdminHeader />
       <div className="flex">
         <AdminSideBar />
-        {children}
+        <>{children}</>
       </div>
       <GlobalFooter />
     </>

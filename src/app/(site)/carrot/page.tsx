@@ -1,5 +1,6 @@
 "use client";
 
+import { useParams, useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function CarrotPage() {
@@ -44,9 +45,13 @@ export default function CarrotPage() {
     const interval = setInterval(updatePositions, 50);
     return () => clearInterval(interval);
   }, []);
+  const searchParams = useSearchParams();
+  const word = searchParams.get("word") || "";
 
   useEffect(() => {
-    const baseText = "나는이사이트를만들다죽고말거야".repeat(1000);
+    const baseText = (
+      word === "" ? "나는이사이트를만들다죽고말거야" : word
+    ).repeat(1000);
     setText(baseText);
 
     const handleScroll = () => {

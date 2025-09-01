@@ -53,6 +53,7 @@ export default function RegisterSchoolNumbForm() {
     <div className="max-w-80 mx-10 flex flex-col gap-5">
       <div className="flex flex-col gap-1">
         <Input
+          className="min-w-80"
           label="학번을 입력해주세요."
           name="schoolnumber"
           onChange={onTextChange}

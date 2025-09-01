@@ -44,6 +44,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="ko-KR">
+      <head>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4683344705910726"
+          crossOrigin="anonymous"
+        ></script>
+        <script
+          async
+          src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4683344705910726"
+          crossOrigin="anonymous"
+        ></script>
+      </head>
       <body className={`${fontSans.className} antialiased`}>
         <ThemeProvider defaultTheme="system" enableSystem attribute="class">
           <CarrotTyper />

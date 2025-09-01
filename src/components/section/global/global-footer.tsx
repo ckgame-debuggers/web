@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function GlobalFooter() {
   return (
-    <footer className="border-t border-t-border py-10 px-5 mt-10 flex flex-col gap-3 w-full pb-25 items-center">
+    <footer className="border-t border-t-border py-10 px-5 flex flex-col gap-3 w-full pb-25 items-center">
       <ul className="grid grid-cols-2 md:grid-cols-4 py-4 w-full max-w-[1200px] px-5 mx-auto">
         <li>
           <h5>Products</h5>

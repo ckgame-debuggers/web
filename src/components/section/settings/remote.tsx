@@ -8,7 +8,7 @@ export default function SettingRemote({
   children: React.ReactNode;
 }>) {
   return (
-    <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row">
+    <div className="max-w-[1200px] mx-auto flex flex-col md:flex-row pt-5">
       <RequireLogin />
       <div className="flex flex-col min-w-40 md:sticky top-0 h-fit">
         <SettingRemoteUrl href="/settings">홈</SettingRemoteUrl>

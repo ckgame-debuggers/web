@@ -1,9 +1,11 @@
 "use client";
 
+import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 
 export default function BannedPage() {
   const [headerHeight, setHeaderHeight] = useState(0);
+  const bannedFor = useSearchParams().get("for");
   useEffect(() => {
     const prepare = () => {
       const header = document.getElementById("community-header");
@@ -43,7 +45,9 @@ export default function BannedPage() {
         <br />
         더욱 클린한 학교 커뮤니티의 운영을 위해,
         <br />
-        9999-12-31까지 이용이 제한됩니다.
+        {bannedFor
+          ? `${bannedFor}까지 이용이 제한됩니다.`
+          : "커뮤니티 이용이 영구 차단되셨습니다."}
       </p>
     </main>
   );

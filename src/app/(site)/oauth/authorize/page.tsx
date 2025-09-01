@@ -11,6 +11,7 @@ import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { DebuggersAPI } from "@/components/util/api";
 import { AxiosResponse } from "axios";
+import useUserStore from "@/store/user";
 
 type application = {
   title: string;
@@ -20,6 +21,7 @@ type application = {
 };
 
 export default function AuthChallengePage() {
+  const { isLoggedIn, isLoading } = useUserStore();
   const searchParams = useSearchParams();
   const clientId = searchParams.get("client_id");
   const responseType = searchParams.get("response_type");
@@ -34,6 +36,7 @@ export default function AuthChallengePage() {
   const debuggersApi = DebuggersAPI.getInstance();
 
   useEffect(() => {
+    if (isLoading) return;
     const prepare = async () => {
       if (!clientId || !responseType || !redirectsTo) {
         setError("잘못된 접근입니다. (필수 파라미터 누락)");
@@ -65,7 +68,16 @@ export default function AuthChallengePage() {
       }
     };
     prepare();
-  }, [clientId, responseType, redirectsTo]);
+  }, [clientId, responseType, redirectsTo, isLoading]);
+
+  useEffect(() => {
+    console.log(isLoading, isLoggedIn);
+    if (isLoading) return;
+    if (!isLoggedIn) {
+      const currentUrl = encodeURIComponent(window.location.href);
+      window.location.href = `/login?redirect=${currentUrl}`;
+    }
+  }, [isLoading, isLoggedIn]);
 
   const handleAllChange = (checked: boolean) => {
     if (!app) return;

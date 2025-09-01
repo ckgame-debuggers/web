@@ -7,7 +7,17 @@ const useCommunityStore = create<{
   level: number;
   nextLevelExp: number;
   currentExp: number;
+  isBanned: boolean;
+  banExpiresAt?: string;
+  point: number;
   isLoading: boolean;
+  defaultBadge: {
+    id: number;
+    title: string;
+    description: string;
+    img: string;
+    isDefault: boolean;
+  };
   setCommunityUserInfo: (newState: CommunityUserInfoType) => void;
   setLoggedOut: () => void;
 }>((set) => ({
@@ -16,6 +26,16 @@ const useCommunityStore = create<{
   nextLevelExp: 0,
   currentExp: 0,
   isLoading: true,
+  isBanned: false,
+  point: 0,
+  banExpiresAt: "",
+  defaultBadge: {
+    id: 0,
+    title: "",
+    description: "",
+    img: "",
+    isDefault: false,
+  },
   setCommunityUserInfo: (newState: CommunityUserInfoType) => {
     set(() => ({
       ...newState,

@@ -1,48 +1,26 @@
+"use client";
+import { DebuggersAPI } from "@/components/util/api";
+import { useEffect, useState } from "react";
+import parse from "react-html-parser";
+
 export default function AboutPage() {
+  const [contents, setContents] = useState("");
+  const debuggersAPI = DebuggersAPI.getInstance();
+
+  useEffect(() => {
+    const prepare = async () => {
+      const data = (await debuggersAPI.get("/global/about")).data
+        .data as string;
+      setContents(data);
+    };
+    prepare();
+  }, []);
   return (
     <main className="flex flex-col gap-10 py-10 max-w-[900px] mx-auto px-10">
       <section>
-        <h2 className="text-2xl font-bold mb-3">
-          디버거즈에 오신 걸 환영해요!
-        </h2>
-        <p>
-          안녕하세요! 저희는 2025 게임스쿨 학생회 <b>‘디버거즈’</b>입니다.
-          <br />
-          혹시 <b>디버깅(debugging)</b>이라는 단어, 들어보셨나요? 프로그램을
-          만들다 보면 가끔 예상치 못한 오류가 생기곤 하죠. 그럴 때마다 하나씩
-          문제를 찾아내고 고쳐가면서 더 멋진 결과물을 만들어내는 게 바로
-          디버깅이에요.
-        </p>
-        <p>
-          저희 디버거즈도 그런 마음으로 시작했어요. 학교 생활에서 만나는
-          불편함이나 고민, 크고 작은 문제들을 함께 찾아내고, 같이 해결해 나가고
-          싶었거든요.
-        </p>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-bold mb-3">우리가 바라는 학교</h2>
-        <p>
-          게임스쿨에서 공부하는 여러분이 더 즐겁고, 더 편하게 성장할 수 있도록
-          저희가 곁에서 도와드릴게요. 여러분이 겪는 불편함이나 궁금증, 사소한
-          고민까지 모두 소중하게 생각하고, 함께 해결해 나가고 싶어요.
-        </p>
-        <p>
-          혼자 고민하지 마시고 언제든 편하게 이야기해 주세요! 여러분의 목소리에
-          항상 귀 기울이고, 더 나은 학교를 만들어가기 위해 노력할게요.
-        </p>
-      </section>
-
-      <section>
-        <h2 className="text-2xl font-bold mb-3">함께 만들어가요</h2>
-        <p>
-          여러분의 작은 의견 하나도 소중하게 생각해요. 언제든, 어떤 이야기든
-          편하게 들려주세요. 디버거즈는 여러분과 함께, 더 좋은 게임스쿨을
-          만들어가고 싶어요.
-        </p>
-        <p>
-          앞으로도 쭉, 여러분 곁에서 든든한 친구가 되어드릴게요. 감사합니다!
-        </p>
+        <div className="ql-snow">
+          <div className="ql-editor">{parse(contents)}</div>
+        </div>
       </section>
     </main>
   );

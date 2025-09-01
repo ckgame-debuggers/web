@@ -19,18 +19,14 @@ const withRefresh = <T extends (...args: any[]) => Promise<any>>(
       return await method.apply(this, args);
     } catch (error: any) {
       if (error.response?.status === 403) {
-        try {
-          await axios.post(
-            `/api/auth/refresh`,
-            {},
-            {
-              withCredentials: true,
-            }
-          );
-          return await method.apply(this, args);
-        } catch (refreshError) {
-          throw new Error("로그인되지 않았습니다.");
-        }
+        await axios.post(
+          `/api/auth/refresh`,
+          {},
+          {
+            withCredentials: true,
+          }
+        );
+        return await method.apply(this, args);
       }
       throw error;
     }

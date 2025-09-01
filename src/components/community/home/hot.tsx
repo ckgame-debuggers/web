@@ -1,6 +1,42 @@
+"use client";
+import { DebuggersAPI } from "@/components/util/api";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+interface Writer {
+  id: number;
+  exp: number;
+  point: number;
+  banExpireAt: string | null;
+  description: string;
+  isBanned: boolean;
+}
+
+interface Post {
+  id: number;
+  title: string;
+  content: string;
+  createdAt: string;
+  isHot: boolean;
+  isUnknown: boolean;
+  permission: number;
+  points: number;
+  thumbnail: string;
+  writer: Writer;
+}
 
 export default function CommunityHomeHot() {
+  const debuggersAPI = DebuggersAPI.getInstance();
+  const [hotPosts, setHotPosts] = useState<Post[]>([]);
+
+  useEffect(() => {
+    const prepare = async () => {
+      const res = await debuggersAPI.get("/community/hot?take=5");
+      setHotPosts(res.data.data);
+    };
+    prepare();
+  }, []);
+
   return (
     <div className="border rounded-md bg-background shadow-2xl dark:shadow-white/2 overflow-hidden">
       <Link
@@ -29,40 +65,11 @@ export default function CommunityHomeHot() {
         <h3>이번 주 핫한 게시글</h3>
       </Link>
       <div className="h-fit min-h-10">
-        {[
-          {
-            title: "디버거즈 커뮤니티가 새롭게 오픈했습니다!",
-            category: "tech",
-            id: 1,
-          },
-          {
-            title: "프론트엔드 개발자 면접 후기 공유드립니다",
-            category: "tech",
-            id: 1,
-          },
-          {
-            title: "[React] 상태관리 라이브러리 비교 분석",
-            category: "tech",
-            id: 1,
-          },
-          { title: "신입 개발자의 첫 회사 적응기", category: "tech", id: 1 },
-          {
-            title: "알고리즘 스터디원 모집합니다 (주 2회)",
-            category: "tech",
-            id: 1,
-          },
-        ].map((item, index) => (
-          <div key={index}>
-            <HotItem
-              title={item.title}
-              category={item.category}
-              id={item.id}
-              index={index + 1}
-            />
-            {index !== 4 ? (
-              <div className="w-[98%] bg-border h-[1px]"></div>
-            ) : (
-              <></>
+        {hotPosts.map((post, index) => (
+          <div key={index} className="w-full">
+            <HotItem title={post.title} id={post.id} index={index + 1} />
+            {index !== hotPosts.length - 1 && (
+              <div className="w-full bg-border h-[1px]"></div>
             )}
           </div>
         ))}
@@ -73,19 +80,17 @@ export default function CommunityHomeHot() {
 
 function HotItem({
   title,
-  category,
   id,
   index,
 }: {
   title: string;
-  category: string;
   id: number;
   index: number;
 }) {
   return (
     <Link
-      className="px-4 py-3 flex items-center gap-4 hover:bg-sidebar/50 dark:hover:bg-white/2"
-      href={`/community/post/${category}/${id}`}
+      className="px-4 py-3 w-full flex items-center gap-4 hover:bg-sidebar/50 dark:hover:bg-white/2"
+      href={`/community/post/${id}`}
     >
       <p className="bg-foreground/5 text-foreground/40 font-bold text-xs p-1 flex justify-center items-center overflow-hidden rounded-full w-6">
         {index}

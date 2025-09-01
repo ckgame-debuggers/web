@@ -6,16 +6,53 @@ import "swiper/css/effect-fade";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Autoplay, EffectFade, Navigation, Pagination } from "swiper/modules";
-import { Fragment, useEffect } from "react";
+import { Fragment, useEffect, useState } from "react";
 import Link from "next/link";
 import { DebuggersAPI } from "@/components/util/api";
 
+type BannerType = {
+  id: number;
+  title: string;
+  image: string;
+  url: string;
+  contents: string;
+  visible: boolean;
+};
+
 export default function HomeBanner() {
+  const [bannerItems, setBannerItems] = useState<BannerType[]>([]);
   const debuggersAPI = DebuggersAPI.getInstance();
   useEffect(() => {
-    const prepare = async () => {};
+    const prepare = async () => {
+      const res: BannerType[] = (await debuggersAPI.get("/global/banners")).data
+        .data;
+      setBannerItems(res);
+    };
     prepare();
   }, []);
+
+  if (bannerItems.length === 0)
+    return (
+      <div className="text-foreground/50 flex flex-col items-center justify-center gap-2 py-20 border-b">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          fill="none"
+          viewBox="0 0 24 24"
+          strokeWidth={1.5}
+          stroke="currentColor"
+          className="size-16"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126ZM12 15.75h.007v.008H12v-.008Z"
+          />
+        </svg>
+
+        <h3>배너 정보를 불러올 수 없었어요.</h3>
+      </div>
+    );
+
   return (
     <Swiper
       spaceBetween={30}
@@ -40,26 +77,16 @@ export default function HomeBanner() {
       className="text-white"
       modules={[EffectFade, Navigation, Pagination, Autoplay]}
     >
-      <SwiperSlide>
-        <BannerItem
-          title="디버거즈 웹 페이지 오픈"
-          desc={
-            "디버거즈 웹 사이트가 드디어 오픈되었습니다.\n다양한 기능과 정보를 제공하며, 사용자 친화적인 인터페이스로 여러분을 맞이합니다."
-          }
-          img="/gyao/갸오엽서_봄.png"
-          href="https://youtube.com"
-        />
-      </SwiperSlide>
-      <SwiperSlide>
-        <BannerItem
-          title="중간고사 기간이 되었습니다"
-          desc={
-            "힘내세요! 여러분의 노력이 결실을 맺을 거예요!\n모두가 최선을 다하고 있으니, 좋은 결과가 있을 거예요!"
-          }
-          img="/gyao/시험대박.png"
-          href="/gyao/시험대박.png"
-        />
-      </SwiperSlide>
+      {bannerItems.map((banner, i) => (
+        <SwiperSlide key={i}>
+          <BannerItem
+            title={banner.title}
+            desc={banner.contents}
+            img={banner.image}
+            href={banner.url}
+          />
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 }
@@ -76,20 +103,20 @@ function BannerItem({
   img: string;
 }) {
   return (
-    <Link href={href} target={href.startsWith("https://") ? "_blank" : ""}>
+    <Link href={href} target="_blank">
       <div className="relative bg-background">
-        <div className="max-w-[1200px] mx-auto pl-15">
-          <div className="absolute z-50 bottom-20">
-            <h2 className="text-5xl font-black">{title}</h2>
-            <div className="h-5"></div>
+        <div className="max-w-[1200px] mx-auto pl-4 md:pl-15">
+          <div className="absolute z-50 bottom-10 md:bottom-20">
+            <h2 className="text-2xl md:text-5xl font-black">{title}</h2>
+            <div className="h-2 md:h-5"></div>
             {desc.split("\n").map((str, i) => (
               <Fragment key={i}>
-                <p>{str}</p>
+                <p className="text-sm md:text-md ">{str}</p>
               </Fragment>
             ))}
           </div>
         </div>
-        <div className="w-full h-full bg-black opacity-50 absolute left-0 top-0 z-0"></div>
+        <div className="w-full h-full bg-black opacity-70 absolute left-0 top-0 z-0"></div>
         <img className="w-full h-96 object-cover object-center" src={img} />
       </div>
     </Link>

@@ -4,7 +4,6 @@ import { cn } from "@/lib/utils";
 
 interface Avatar {
   imageUrl: string;
-  profileUrl: string;
   userId?: string;
 }
 interface AvatarCirclesProps {
@@ -29,15 +28,9 @@ export const AvatarCircles = ({
   return (
     <div className={cn("z-10 flex -space-x-4 rtl:space-x-reverse", className)}>
       {avatarUrls.map((url, index) => {
-        const profileLink = url.userId
-          ? createDiscordProfileUrl(url.userId)
-          : url.profileUrl;
-
         return (
-          <a
+          <div
             key={index}
-            href={profileLink}
-            target="_blank"
             rel="noopener noreferrer"
             onClick={(e) => {
               if (url.userId) {
@@ -64,16 +57,13 @@ export const AvatarCircles = ({
               height={40}
               alt={`Avatar ${index + 1}`}
             />
-          </a>
+          </div>
         );
       })}
       {(numPeople ?? 0) > 0 && (
-        <a
-          className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-black text-center text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800 dark:bg-white dark:text-black"
-          href=""
-        >
+        <div className="flex h-10 w-10 items-center justify-center rounded-full border-2 border-white bg-black text-center text-xs font-medium text-white hover:bg-gray-600 dark:border-gray-800 dark:bg-white dark:text-black">
           +{numPeople}
-        </a>
+        </div>
       )}
     </div>
   );

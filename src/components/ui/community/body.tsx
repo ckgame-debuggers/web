@@ -13,13 +13,13 @@ export default function CommunityBody({
 
   return (
     <div
-      className="flex justify-between px-5 md:px-10 gap-3 py-10 h-fit"
+      className="flex justify-between px-5 md:px-10 gap-3 py-10 h-fit max-w-[1300px] mx-auto"
       style={{ marginBottom: "calc(var(--spacing) * -10)" }}
     >
       <div className="hidden lg:block">
         <CommunitySidebar />
       </div>
-      <div className="flex-1">
+      <div className="flex-1 mb-10 ">
         <CommunityAdvertise />
         {children}
       </div>

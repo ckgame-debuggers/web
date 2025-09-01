@@ -1,7 +1,7 @@
 export const sidebarItems: {
   title: string;
   icon: React.ReactNode;
-  items?: { title: string; href: string }[];
+  items?: { title: string; href: string; permission?: number }[];
 }[] = [
   {
     title: "사이트 설정",
@@ -34,6 +34,7 @@ export const sidebarItems: {
       {
         title: "소개 관리",
         href: "/admin/site/about",
+        permission: 4,
       },
       {
         title: "배너 관리",
@@ -44,17 +45,17 @@ export const sidebarItems: {
         href: "/admin/site/related-site",
       },
       {
-        title: "이메일 전송 관리",
-        href: "/admin/site/about",
+        title: "동아리 관리",
+        href: "/admin/site/club",
       },
       {
-        title: "SNS 관리",
-        href: "/admin/site/sns",
+        title: "기타",
+        href: "/admin/site/etc",
       },
     ],
   },
   {
-    title: "문의 관리",
+    title: "CkDebugger 관리",
     icon: (
       <svg
         xmlns="http://www.w3.org/2000/svg"
@@ -73,11 +74,11 @@ export const sidebarItems: {
     ),
     items: [
       {
-        title: "디버깅",
+        title: "CkGameDebugger",
         href: "/admin/support/debugging",
       },
       {
-        title: "소모임 생성 문의 관리",
+        title: "관리",
         href: "/admin/support/create-crew",
       },
       {
@@ -144,6 +145,55 @@ export const sidebarItems: {
       },
       {
         title: "리뷰 관리",
+        href: "/admin/shop/review",
+      },
+    ],
+  },
+  {
+    title: "커뮤니티",
+    icon: (
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        strokeWidth={1.5}
+        stroke="currentColor"
+        className="size-6"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
+        />
+      </svg>
+    ),
+    items: [
+      {
+        title: "공지 관리",
+        href: "/admin/community/user",
+      },
+      {
+        title: "유저 관리",
+        href: "/admin/community/user",
+      },
+      {
+        title: "퀘스트 관리",
+        href: "/admin/community/user",
+      },
+      {
+        title: "상점 관리",
+        href: "/admin/community/user",
+      },
+      {
+        title: "광고 관리",
+        href: "/admin/community/user",
+      },
+      {
+        title: "퀘스트 관리",
+        href: "/admin/community/badge",
+      },
+      {
+        title: "신고 확인",
         href: "/admin/shop/review",
       },
     ],

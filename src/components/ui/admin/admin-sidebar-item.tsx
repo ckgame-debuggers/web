@@ -22,7 +22,7 @@ export default function AdminSideBarItem({
   }, [pathname]);
 
   return (
-    <div className="py-1 text-sm">
+    <div className="py-1 text-sm" id={`admin-redirectto-${href}`}>
       <Link
         href={href}
         style={{

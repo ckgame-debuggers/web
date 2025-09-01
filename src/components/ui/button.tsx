@@ -29,7 +29,7 @@ export function buttonVariants({
   const classes = {
     default:
       "font-normal text-primary-foreground bg-primary hover:opacity-70 bg-background border-primary border",
-    outline: "border border-border hover:bg-white/40 bg-background",
+    outline: "border border-border bg-background",
     destructive: "font-bold bg-red-500 hover:opacity-90 text-white",
     ghost: "hover:bg-foreground/10 cursor-pointer",
   };
@@ -46,6 +46,7 @@ export function buttonVariants({
     "disabled:opacity-70",
     "disabled:cursor-not-allowed",
     "duration-300",
+    "cursor-pointer",
     sizes[size as keyof typeof sizes],
     classes[variants as keyof typeof classes],
   ].join(" ");

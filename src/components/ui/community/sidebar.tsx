@@ -7,8 +7,7 @@ import useCommunityStore from "@/store/community";
 
 export default function CommunitySidebar() {
   const { user, isLoggedIn, profile } = useUserStore();
-  const { level, nextLevelExp, currentExp } = useCommunityStore();
-  const [expPercent, setExpPercent] = useState(80);
+  const { level, nextLevelExp, currentExp, defaultBadge } = useCommunityStore();
   const currentURL = useMemo<string>(() => {
     const location = window.location.href;
     if (location.endsWith("/login")) return "/";
@@ -20,9 +19,28 @@ export default function CommunitySidebar() {
       {isLoggedIn ? (
         <div className="bg-background shadow-2xl dark:shadow-white/2 border border-border rounded-md p-3">
           <div className="flex">
-            <div className="w-14 h-14 flex items-center justify-center text-2xl bg-primary text-primary-foreground overflow-hidden rounded-full">
+            <div className="w-14 h-14 relative flex items-center justify-center text-2xl text-primary-foreground">
               {profile ? (
-                <img src={profile} alt="profile" className="w-full h-full" />
+                <>
+                  <img
+                    src={profile}
+                    alt="profile"
+                    className="w-full h-full overflow-hidden rounded-full"
+                  />
+                  <img
+                    src={
+                      defaultBadge.img === ""
+                        ? "/resources/error.png"
+                        : defaultBadge.img
+                    }
+                    alt={defaultBadge.title}
+                    className="absolute right-[-15%] bottom-[-10%] w-6"
+                    style={{
+                      filter:
+                        "drop-shadow(2px 0 0 var(--background)) drop-shadow(-2px 0 0 var(--background)) drop-shadow(0 2px 0 var(--background)) drop-shadow(0 -2px 0 var(--background))",
+                    }}
+                  />
+                </>
               ) : (
                 user.username.slice(0, 2)
               )}
@@ -34,11 +52,7 @@ export default function CommunitySidebar() {
                   : user.username}
               </p>
               <div>
-                <p className="text-xs text-primary">
-                  레벨 {level} | 500 포인트
-                  {currentExp}
-                  {nextLevelExp}
-                </p>
+                <p className="text-xs text-primary">레벨 {level}</p>
                 <div className="bg-accent h-1 w-full my-2 rounded-full overflow-hidden">
                   <div
                     className="h-full bg-primary rounded-full transition-[width] duration-300 ease-in-out"
@@ -95,9 +109,8 @@ export default function CommunitySidebar() {
           디버거즈에 로그인
         </Link>
       )}
-      <div className="grid grid-cols-2 gap-[2px] mt-3 border border-border rounded-md dark:shadow-white/2 shadow-2xl overflow-hidden">
+      <div className="grid grid-cols-1 gap-[2px] mt-3 border border-border rounded-md dark:shadow-white/2 shadow-2xl overflow-hidden">
         <SidebarItem href="/community/shop" title="상점" />
-        <SidebarItem href="/community/quest" title="퀘스트" />
       </div>
     </div>
   );

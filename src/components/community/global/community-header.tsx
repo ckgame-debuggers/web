@@ -3,17 +3,16 @@ import Image from "next/image";
 import Link from "next/link";
 import SearchBar from "@/components/ui/community/search-bar";
 import ThemeChanger from "@/components/ui/theme-changer";
-import { Button, buttonVariants } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
 import { DebuggersAPI } from "@/components/util/api";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo } from "react";
 import useUserStore from "@/store/user";
 
 import logo from "$/brand/logo.png";
 import Avatar from "@/components/ui/avatar";
-import { josa } from "es-hangul";
 
 export default function CommunityHeader() {
-  const { user, setUser, isLoggedIn, profile } = useUserStore();
+  const { user, setUser, isLoggedIn, profile, permission } = useUserStore();
 
   const currentURL = useMemo<string>(() => {
     const location = window.location.href;
@@ -75,7 +74,33 @@ export default function CommunityHeader() {
             </Link>
           </div>
         </div>
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-4">
+          <div className="flex items-center">
+            {permission >= 3 ? (
+              <Link
+                className="text-foreground/60 p-2 hover:bg-foreground/10 rounded-full hidden md:block"
+                href={"/admin/site/notice"}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="none"
+                  viewBox="0 0 24 24"
+                  strokeWidth={1.5}
+                  stroke="currentColor"
+                  className="size-5"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    d="M10.5 6h9.75M10.5 6a1.5 1.5 0 1 1-3 0m3 0a1.5 1.5 0 1 0-3 0M3.75 6H7.5m3 12h9.75m-9.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-3.75 0H7.5m9-6h3.75m-3.75 0a1.5 1.5 0 0 1-3 0m3 0a1.5 1.5 0 0 0-3 0m-9.75 0h9.75"
+                  />
+                </svg>
+              </Link>
+            ) : (
+              <></>
+            )}
+            <ThemeChanger />
+          </div>
           {isLoggedIn ? (
             <Link href={"/settings/community"} className="flex items-center">
               <Avatar
@@ -93,7 +118,6 @@ export default function CommunityHeader() {
               로그인
             </Link>
           )}
-          <ThemeChanger />
         </div>
       </div>
     </header>
