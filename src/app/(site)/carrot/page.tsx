@@ -61,7 +61,11 @@ export default function CarrotPage() {
 
       // 스크롤이 80% 이상 내려갔을 때 텍스트 추가
       if (scrollTop + clientHeight >= scrollHeight * 0.8) {
-        setText((prev) => prev + "나는이사이트를만들다죽고말거야".repeat(100));
+        setText(
+          (prev) =>
+            prev +
+            (word === "" ? "나는이사이트를만들다죽고말거야" : word).repeat(100)
+        );
       }
     };
 
