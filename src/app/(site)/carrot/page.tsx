@@ -47,6 +47,7 @@ export default function CarrotPage() {
   }, []);
   const searchParams = useSearchParams();
   const word = searchParams.get("word") || "";
+  const imageSrc = searchParams.get("img") || "";
 
   useEffect(() => {
     const baseText = (
@@ -87,7 +88,7 @@ export default function CarrotPage() {
               transform: `translate(${pos.x}px, ${pos.y}px) rotate(${pos.rotation}deg)`,
               width: "100px",
             }}
-            src="/resources/carrot.png"
+            src={imageSrc === "" ? "/resources/carrot.png" : imageSrc}
             alt={`carrot-${i + 1}`}
           />
         ))}
