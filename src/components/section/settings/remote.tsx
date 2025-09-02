@@ -15,6 +15,7 @@ export default function SettingRemote({
         <SettingRemoteUrl href="/settings/account">계정 정보</SettingRemoteUrl>
         <SettingRemoteUrl href="/settings/crew">소모임</SettingRemoteUrl>
         <SettingRemoteUrl href="/settings/community">커뮤니티</SettingRemoteUrl>
+        <SettingRemoteUrl href="/logout">로그아웃</SettingRemoteUrl>
       </div>
       <div className="flex-1 px-10">{children}</div>
     </div>

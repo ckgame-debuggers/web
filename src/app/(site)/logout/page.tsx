@@ -1,7 +1,13 @@
 "use client";
 import { Button } from "@/components/ui/button";
+import { DebuggersAPI } from "@/components/util/api";
 
 export default function LogoutPage() {
+  const handleLogout = async () => {
+    const debuggersAPI = DebuggersAPI.getInstance();
+    await debuggersAPI.logout();
+    window.location.href = "/";
+  };
   const cancel = () => {
     window.history.back();
   };
@@ -18,7 +24,11 @@ export default function LogoutPage() {
           >
             취소
           </Button>
-          <Button className="flex-1 cursor-pointer" variants="destructive">
+          <Button
+            onClick={handleLogout}
+            className="flex-1 cursor-pointer"
+            variants="destructive"
+          >
             로그아웃
           </Button>
         </div>

@@ -189,9 +189,9 @@ export default function CommunityCategoryPage() {
           </div>
         ))}
       </div>
-      {category.totalPages > 1 ? (
+      {category.totalPages > 0 ? (
         <div className="flex justify-center gap-2 py-4">
-          {Array.from({ length: category.totalPages }, (_, i) => i + 1).map(
+          {Array.from({ length: category.totalPages + 1 }, (_, i) => i + 1).map(
             (pageNum) => (
               <Link
                 key={pageNum}

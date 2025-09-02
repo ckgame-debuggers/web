@@ -2,6 +2,7 @@ import CommunityHeader from "@/components/community/global/community-header";
 import GlobalFooter from "@/components/section/global/global-footer";
 import CommunityBody from "@/components/ui/community/body";
 import LoadCommunityInfo from "@/components/util/load-community-user-info";
+import RequireLogin from "@/components/util/require-login";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

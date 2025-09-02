@@ -3,6 +3,7 @@
 import { create } from "zustand";
 
 const useCommunityStore = create<{
+  userId: number;
   description: string;
   level: number;
   nextLevelExp: number;
@@ -21,6 +22,7 @@ const useCommunityStore = create<{
   setCommunityUserInfo: (newState: CommunityUserInfoType) => void;
   setLoggedOut: () => void;
 }>((set) => ({
+  userId: 0,
   description: "",
   level: 0,
   nextLevelExp: 0,

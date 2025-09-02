@@ -8,11 +8,12 @@ import HeaderItems from "@/components/ui/header-item";
 import { DebuggersAPI } from "@/components/util/api";
 import Avatar from "@/components/ui/avatar";
 import useUserStore from "@/store/user";
-
-import logo from "$/brand/logo.png";
 import GlobalMobileHeaderMenu from "./global-mobile-header-menu";
 import { usePathname } from "next/navigation";
 import Notice from "./notice";
+
+import logo from "$/brand/logo.png";
+
 export default function GlobalHeader() {
   const { user, setUser, isLoggedIn, profile, setIsLoading, permission } =
     useUserStore();

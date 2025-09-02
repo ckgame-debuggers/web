@@ -1,31 +1,48 @@
 "use client";
 
-import { useEffect } from "react";
-import { usePathname } from "next/navigation";
+import { useEffect, useMemo } from "react";
 import useCommunityStore from "@/store/community";
 import { DebuggersAPI } from "./api";
 import useUserStore from "@/store/user";
 
-export default function xLoadCommunityInfo() {
+export default function LoadCommunityInfo() {
+  const { setUser, isLoggedIn, setIsLoading } = useUserStore();
   const { setCommunityUserInfo } = useCommunityStore();
-  const { isLoading, isLoggedIn } = useUserStore();
-  const debuggersAPI = DebuggersAPI.getInstance();
+  const debuggersAPI = useMemo(() => DebuggersAPI.getInstance(), []);
 
   useEffect(() => {
     const prepare = async () => {
       try {
-        if (!isLoggedIn && isLoading) return;
-        const data: CommunityUserInfoType = (
-          await debuggersAPI.get("/community/me")
-        ).data?.data as CommunityUserInfoType;
-        if (data.isBanned) {
-          window.location.href = `/community/banned${data.banExpiresAt ? `?for=${data.banExpiresAt}` : ""}`;
+        const userData = await debuggersAPI.isLoggedIn();
+        if (userData) {
+          setUser(userData);
+        } else {
+          setIsLoading(false);
+          window.location.href = `/login?redirect=/community`;
+          return;
         }
-        setCommunityUserInfo(data);
-      } catch (e) {}
+        console.log(userData);
+
+        const { data } = await debuggersAPI.get("/community/me");
+        const communityData = data?.data as CommunityUserInfoType;
+
+        if (communityData.isBanned) {
+          const banQuery = communityData.banExpiresAt
+            ? `?for=${communityData.banExpiresAt}`
+            : "";
+          window.location.href = `/community/banned${banQuery}`;
+          return;
+        }
+
+        setCommunityUserInfo(communityData);
+      } catch (e) {
+        setIsLoading(false);
+        window.location.href = `/login?redirect=/community`;
+      }
     };
+
     prepare();
-  }, [isLoading, isLoggedIn]);
+  }, [debuggersAPI, isLoggedIn, setIsLoading, setUser, setCommunityUserInfo]);
 
   return null;
 }

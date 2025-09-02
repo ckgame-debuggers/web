@@ -55,6 +55,10 @@ export class DebuggersAPI {
     await this.axiosInstance.post("/api/auth/login", props);
   }
 
+  async logout(): Promise<void> {
+    await this.axiosInstance.post("/api/auth/logout");
+  }
+
   isLoggedIn = withRefresh(async (): Promise<any | undefined> => {
     const { data } = await this.axiosInstance.get("/api/auth/authenticate");
     return data;
