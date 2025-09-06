@@ -68,6 +68,27 @@ export default function PostEditorForm({
     []
   );
 
+  const formats = useMemo(
+    () => [
+      "header",
+      "bold",
+      "italic",
+      "underline",
+      "strike",
+      "blockquote",
+      "code-block",
+      "list",
+      "bullet",
+      "script",
+      "indent",
+      "color",
+      "background",
+      "link",
+      "clean",
+    ],
+    []
+  );
+
   const handleSubmit = async () => {
     if (!title.trim()) {
       toast.error("제목을 입력해주세요");
@@ -108,6 +129,7 @@ export default function PostEditorForm({
         <ReactQuill
           theme="snow"
           modules={modules}
+          formats={formats}
           placeholder="내용을 입력해주세요"
           value={content}
           onChange={setContent}

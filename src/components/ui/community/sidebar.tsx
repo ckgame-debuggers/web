@@ -27,7 +27,7 @@ export default function CommunitySidebar() {
                     alt="profile"
                     className="w-full h-full overflow-hidden rounded-full"
                   />
-                  <img
+                  {/* <img
                     src={
                       defaultBadge.img === ""
                         ? "/resources/error.png"
@@ -39,7 +39,7 @@ export default function CommunitySidebar() {
                       filter:
                         "drop-shadow(2px 0 0 var(--background)) drop-shadow(-2px 0 0 var(--background)) drop-shadow(0 2px 0 var(--background)) drop-shadow(0 -2px 0 var(--background))",
                     }}
-                  />
+                  /> */}
                 </>
               ) : (
                 user.username.slice(0, 2)
@@ -109,9 +109,9 @@ export default function CommunitySidebar() {
           디버거즈에 로그인
         </Link>
       )}
-      <div className="grid grid-cols-1 gap-[2px] mt-3 border border-border rounded-md dark:shadow-white/2 shadow-2xl overflow-hidden">
+      {/* <div className="grid grid-cols-1 gap-[2px] mt-3 border border-border rounded-md dark:shadow-white/2 shadow-2xl overflow-hidden">
         <SidebarItem href="/community/shop" title="상점" />
-      </div>
+      </div> */}
     </div>
   );
 }

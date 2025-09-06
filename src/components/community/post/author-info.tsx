@@ -59,7 +59,7 @@ export default function PostAuthorInfo({
           className="rounded-md"
           alt="프로필 이미지"
         />
-        <img
+        {/* <img
           src={badge?.img ?? "none"}
           width={35}
           className="absolute right-[-20%] bottom-[-20%] w-5"
@@ -68,7 +68,7 @@ export default function PostAuthorInfo({
               "drop-shadow(2px 0 0 var(--background)) drop-shadow(-2px 0 0 var(--background)) drop-shadow(0 2px 0 var(--background)) drop-shadow(0 -2px 0 var(--background))",
           }}
           alt="프로필 뱃지"
-        />
+        /> */}
       </div>
       <div className="flex flex-col justify-center">
         <p>

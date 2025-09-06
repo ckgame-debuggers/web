@@ -257,7 +257,7 @@ function Post({
   return (
     <Link href={`/community/post/${id}`}>
       <div className=" gap-2 flex px-5 py-4 items-center hover:bg-black/10 dark:hover:bg-white/10">
-        <img width={25} className="mr-3" src={badge} alt="badge" />
+        {/* <img width={25} className="mr-3" src={badge} alt="badge" /> */}
         <p className="font-bold">{title} - </p>
         <p className="text-xs">{createdAt}</p>
       </div>
